@@ -18,9 +18,14 @@ public class    UserController {
 
     private final UserService service;
 
-    @GetMapping(value = "/users")
+    @GetMapping("/users")
     public Collection<User> findAll() {
         return service.findAll();
+    }
+
+    @GetMapping("/users/{email}")
+    public User findEmail(@PathVariable String email) {
+        return service.findEmail(email);
     }
 
     @PostMapping(value = "/user")
@@ -28,7 +33,7 @@ public class    UserController {
         return service.create(user);
     }
 
-    @PutMapping(value = "/user")
+    @PutMapping("/user")
     public User put(@RequestBody @Valid @NotNull User user) {
         return service.put(user);
     }

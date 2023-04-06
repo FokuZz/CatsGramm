@@ -1,36 +1,28 @@
 package ru.yandex.practicum.catsgram.model;
 
+import lombok.Data;
+
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.PastOrPresent;
 import java.time.LocalDate;
 import java.util.Objects;
 
+@Data
 public class User {
+
+    @NotNull
+    @NotBlank
+    @Email
     private String email;
+    @NotNull
+    @NotBlank
     private String nickname;
+
+    @PastOrPresent
+    @NotNull
     private LocalDate birthdate;
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getNickname() {
-        return nickname;
-    }
-
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
-    }
-
-    public LocalDate getBirthdate() {
-        return birthdate;
-    }
-
-    public void setBirthdate(LocalDate birthdate) {
-        this.birthdate = birthdate;
-    }
 
     @Override
     public boolean equals(Object o) {
