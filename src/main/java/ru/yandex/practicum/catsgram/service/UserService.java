@@ -51,10 +51,10 @@ public class UserService {
         return user;
     }
 
-    public boolean findUserByEmail(String userEmail) {
-        if (users.containsKey(userEmail)) {
-            return true;
+    public User findUserByEmail(String userEmail) {
+        if (userEmail == null){
+            return null;
         }
-        return false;
+        return users.get(userEmail);
     }
 }
