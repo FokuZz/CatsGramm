@@ -9,12 +9,12 @@ import java.time.Instant;
 
 @Data
 public class Post {
-    private Integer id;
     @NotNull
     private final String author; // автор
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Getter
     private final Instant creationDate = Instant.now(); // дата создания
+    private Integer id;
     @NotNull
     private String description; // описание
     @NotNull

@@ -52,7 +52,7 @@ public class UserService {
     }
 
     public User findUserByEmail(String userEmail) {
-        if (userEmail == null){
+        if (userEmail == null) {
             return null;
         }
         return users.get(userEmail);

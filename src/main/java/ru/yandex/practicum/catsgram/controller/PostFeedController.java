@@ -29,12 +29,12 @@ public class PostFeedController {
             String friendString = objectMapper.readValue(text, String.class);
             friendsList = objectMapper.readValue(friendString, FriendsList.class);
         } catch (JsonProcessingException e) {
-            throw new RuntimeException("Non-valid format json",e);
+            throw new RuntimeException("Non-valid format json", e);
         }
 
-        if(friendsList != null){
+        if (friendsList != null) {
             List<Post> result = new ArrayList<>();
-            for(String friendEmail: friendsList.friends){
+            for (String friendEmail : friendsList.friends) {
                 result.addAll(service.findAllByUserEmail(friendEmail, friendsList.size, friendsList.sort));
             }
 
@@ -44,6 +44,7 @@ public class PostFeedController {
         }
 
     }
+
     @Data
     static class FriendsList {
         private String sort;

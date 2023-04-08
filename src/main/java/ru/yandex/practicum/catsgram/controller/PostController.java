@@ -3,6 +3,7 @@ package ru.yandex.practicum.catsgram.controller;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.web.bind.annotation.*;
+import ru.yandex.practicum.catsgram.exception.IncorrectParameterException;
 import ru.yandex.practicum.catsgram.model.Post;
 import ru.yandex.practicum.catsgram.service.PostService;
 
@@ -20,18 +21,21 @@ public class PostController {
                                     @RequestParam(value = "size", defaultValue = "10", required = false) Integer size,
                                     @RequestParam(value = "sort", defaultValue = "desc", required = false) String sort) {
 
-        if(!(sort.equals("asc") || sort.equals("desc"))){
-            throw new IllegalArgumentException();
+        if (!(sort.equals("asc") || sort.equals("desc"))) {
+            throw new IncorrectParameterException("Введён неправильный параметр sort = " + sort);
         }
-        if(page < 0 || size <= 0){
-            throw new IllegalArgumentException();
+        if (size <= 0) {
+            throw new IncorrectParameterException("Параметр size не может быть негативным = " + size);
+        }
+        if (page < 0) {
+            throw new IncorrectParameterException("Параметр page не может быть негативным = " + page);
         }
         Integer from = page * size;
-        return service.findAll(sort,size,from);
+        return service.findAll(sort, size, from);
     }
 
     @GetMapping("/posts/{postId}")
-    public Post findId(@PathVariable int postId){
+    public Post findId(@PathVariable int postId) {
         return service.findId(postId);
     }
 
